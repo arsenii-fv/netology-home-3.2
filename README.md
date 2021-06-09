@@ -29,7 +29,8 @@
   echo netology > /proc/$$/fd/5	выводит на экран надпись через текущий процесс дескриптора 5
 
 8.
-
+  $ls -l /root 2>&1 | tee file
+  
 9.
    содержит переменные окружения, заданные на этапе запуска текущего процесса
    команда $env and $printenv
@@ -54,7 +55,7 @@
   tty2
   $ps -a (pid top)
   $screen
-  $reptyr (pid)
+  $sudo reptyr (pid)
   Но с ping не получается выдает ошибку: Unable to open the tty in the child ???
 
 14. 
