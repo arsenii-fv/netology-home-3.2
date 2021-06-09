@@ -47,7 +47,15 @@
   Можно решить: ssh -t localhost "tty" , or ssh user@localhost и выполнить команду $tty
 
 13.
-   
+  tty1
+  $top
+  $ctrl+z
+  $bg
+  tty2
+  $ps -a (pid top)
+  $screen
+  $reptyr (pid)
+  Но с ping не получается выдает ошибку: Unable to open the tty in the child ???
 
 14. 
    команда echo выводит строку используя стандартный поток stdout 
