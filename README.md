@@ -54,7 +54,7 @@
   $top
   $ctrl+z
   $bg
-  
+  another tty
   $ps -a 
   $screen
   $reptyr 1214
