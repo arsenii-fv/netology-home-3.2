@@ -9,8 +9,10 @@ penat(AT_FDCWD, "/usr/share/misc/magic.mgc", O_RDONLY) = 3
 cat /dev/null > /tmp/not_del_me
 
 4.
+Зомби процессы не занимают ресурсы ОС (CPU, RAM, IO) Ядро поддерживает мин набор информации о зомби PID, статус, информацию об использовании ресурсов. Но зомби процессы занимают место в таблице процессов ядра, если она заполнится то новые процессы создаваться не будут.
 
 5.
+
 
 6.
 Part of the utsname information is also accessible via /proc/sys/kernel/{ostype, hostname, osrelease, version, domainname}
