@@ -18,3 +18,9 @@ cat /dev/null > /tmp/not_del_me
 Part of the utsname information is also accessible via /proc/sys/kernel/{ostype, hostname, osrelease, version, domainname}
 
 7.
+
+
+8.
+https://silentsokolov.github.io/safe-bash-sctipts -e полностью прерывает выполнение сценария при неуспешном выполнении предыдущей команды. -u оболочка проверяет инициализацию переменных в скрипте. Если переменной не будет, скрипт немедленно завершиться. -x печатает в стандартный вывод все команды перед их исполнением -o Bash возвращает только код ошибки последней команды в пайпе (конвейере), а параметр -e проверяет только его.
+
+
