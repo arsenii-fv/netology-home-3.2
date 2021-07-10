@@ -11,8 +11,8 @@
                 After=network-online.target
 
                 [Service]
-                User=node_exporter
-                Group=node_exporter
+                User=vagrant
+                Group=vagrant
                 Type=simple
                 ExecStart=/usr/local/bin/node_exporter --collector.disable-defaults --collector.meminfo
 
@@ -28,7 +28,7 @@
                 
 
 2.
-
+  node_exporter --collector.disable-defaults --collector.meminfo.cpu.netstat.filesystem
 
 3.
 
