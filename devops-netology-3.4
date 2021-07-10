@@ -31,7 +31,10 @@
   node_exporter --collector.disable-defaults --collector.meminfo --collector.cpu --collector.netstat --collector.filesystem
   
 3. 
-
+  Total CPU utilization (all cores). 100% here means there is no CPU idle time at all. You can get per core usage at the CPUs section and per application usage at the Applications Monitoring section.
+ Current system load, i.e. the number of processes using CPU or waiting for system resources (usually CPU and disk). 
+  Total Disk I/O, for all physical disks. You can get detailed information about each disk at the Disks section and per application Disk usage at the Applications Monitoring section.
+ System swap memory usage. Swap space is used when the amount of physical memory (RAM) is full 
 4.
 Да можно
 [    0.000000] DMI: innotek GmbH VirtualBox/VirtualBox, BIOS VirtualBox 12/01/2006
@@ -48,7 +51,7 @@ ulimit -n - Максимальное количество открытых фа�
 
 6.
 root@vagrant:~# unshare -fp --mount-proc sleep 1h
-root@vagrant:/# nsenter -t 1 -p -m
+root@vagrant:/# nsenter -t 2255 -p -m
 root@vagrant:/# ps -aux
 USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
 root           1  0.0  0.0   8076   596 pts/0    S    14:49   0:00 sleep 1h
@@ -56,4 +59,4 @@ root           2  0.0  0.0   9836  4024 pts/0    S    14:54   0:00 -bash
 root          11  0.0  0.0  11680  3492 pts/0    R+   14:55   0:00 ps -aux
 
 7.
-
+Определяем функцию :() { в теле она вызывает себя передает через  пайп себя и запускается в фоне}
