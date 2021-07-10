@@ -6,13 +6,13 @@
        sudo mc
        sudo vim /etc/systemd/system/node_exporter.service
                 [Unit]
-                Description=Node_Exporter_U
+                Description=Node Exporter
                 Wants=network-online.target
                 After=network-online.target
 
                 [Service]
-                User=vagrant
-                Group=vagrant
+                User=node_exporter
+                Group=node_exporter
                 Type=simple
                 ExecStart=/usr/local/bin/node_exporter --collector.disable-defaults --collector.meminfo
 
