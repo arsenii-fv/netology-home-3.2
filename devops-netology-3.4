@@ -47,12 +47,13 @@ ulimit -n - Максимальное количество открытых фа�
 
 
 6.
-
+root@vagrant:~# unshare -fp --mount-proc sleep 1h
+root@vagrant:/# nsenter -t 1 -p -m
+root@vagrant:/# ps -aux
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.0   8076   596 pts/0    S    14:49   0:00 sleep 1h
+root           2  0.0  0.0   9836  4024 pts/0    S    14:54   0:00 -bash
+root          11  0.0  0.0  11680  3492 pts/0    R+   14:55   0:00 ps -aux
 
 7.
 
-
-8.
-
-
-9.
