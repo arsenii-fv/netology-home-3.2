@@ -25,7 +25,7 @@
                 extra_par="--collector.disable-defaults --collector.meminfo"
                 
        sudo systemctl status node_exporter
-       sudo systemctl deamon-reload
+       sudo systemctl daemon-reload
        sudo systemctl start node_exporter
        sudo systemctl status node_exporter
        sudo systemctl enable node_exporter
