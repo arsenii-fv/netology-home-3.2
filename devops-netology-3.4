@@ -69,6 +69,10 @@ root          11  0.0  0.0  11680  3492 pts/0    R+   14:55   0:00 ps -aux
      cgroup: fork rejected by pids controller in /user.slice/user-1000.slice/session-4.scope
      Cgroup механизм уровня ядра позволяет управлять использованием системных ресурсов
   
+ # systemctl show -p DefaultLimitNOFILE
+   DefaultLimitNOFILE=524288
+  
  # cat  /etc/systemd/system.conf
-    DefaultLimitNOFILE=1024:524288 Установлен лимит открытых файлов. Для всех слайсов
-    При изменении этого параметра меняется время восстановления системы
+    DefaultLimitNOFILE=1024:524288 Установлен лимит открытых файлов (при превышении предела этого лимита ). Для всех слайсов
+    При изменении этого параметра меняется время восстановления системы.
+ 
