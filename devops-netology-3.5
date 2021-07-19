@@ -1,4 +1,7 @@
-3.
+2.
+
+
+4.
 lsblk
 NAME                 MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
 sda                    8:0    0   64G  0 disk
@@ -28,8 +31,27 @@ sdc                    8:32   0  2.5G  0 disk
 ├─sdc1                 8:33   0    2G  0 part
 └─sdc2                 8:34   0  511M  0 part
 
-4.  
+5.  
 sudo sfdisk -d /dev/sdb > sdb-dump.txt
 sudo sfdisk /dev/sdc < sdb-dump.txt
+
+6. 
+ sudo mdadm --create --verbose /dev/md1 --level=1 --raid-devices=2 /dev/sdb1 /dev/sdc1
+
+7.
+ sudo mdadm --create --verbose /dev/md0 --level=0 --raid-devices=2 /dev/sdb2 /dev/sdc2
+ sudo cat /proc/mdstat
+ 
+8. 
+sudo pvcreate /dev/md1
+sudo pvcreate /dev/md0
+sudo pvscan
+  PV /dev/sda5   VG vgvagrant       lvm2 [<63.50 GiB / 0    free]
+  PV /dev/md0                       lvm2 [1018.00 MiB]
+  PV /dev/md1                       lvm2 [<2.00 GiB]
+  Total: 3 [<66.49 GiB] / in use: 1 [<63.50 GiB] / in no VG: 2 [2.99 GiB]
+
+
+
 
 
