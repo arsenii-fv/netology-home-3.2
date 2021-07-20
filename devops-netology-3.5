@@ -91,3 +91,20 @@ sdc                         8:32   0  2.5G  0 disk
 └─sdc2                      8:34   0  511M  0 part
   └─md126                   9:126  0 1018M  0 raid0
     └─volume--group-lvol0 253:2    0  100M  0 lvm   /tmp/new-vol
+
+15.
+16.
+ sudo pvmove /dev/md126 /dev/md127
+  /dev/md126: Moved: 12.00%
+  /dev/md126: Moved: 100.00%
+ 
+ 17. sudo mdadm /dev/md127 --fail /dev/sdb1
+ 
+ 18.
+ [ 6686.119782] md/raid1:md127: Disk failure on sdb1, disabling device.
+               md/raid1:md127: Operation continuing on 1 devices.
+               
+ 19.   
+vagrant@vagrant:~$ sudo gzip -t /tmp/new-vol/test.gz
+vagrant@vagrant:~$ echo $?
+0
