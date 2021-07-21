@@ -1,5 +1,7 @@
+1.
 2.
-
+Жесткие ссылки имеют одинаковые права доступа и владельца. Все ссылки имеют одинаковый inod что и у исходного файла. 
+Поэтому при изменении разреший или владельца на файл изменяться разрешения и владелец и у жесткой ссылки.
 
 4.
 lsblk
@@ -13,10 +15,15 @@ sda                    8:0    0   64G  0 disk
 sdb                    8:16   0  2.5G  0 disk
 sdc                    8:32   0  2.5G  0 disk
 
+4.
 sudo fdisk /dev/sdb
      n ; p ; +2G ; w
 
-$ lsblk
+5.  
+sudo sfdisk -d /dev/sdb > sdb-dump.txt
+sudo sfdisk /dev/sdc < sdb-dump.txt
+
+lsblk
 NAME                 MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
 sda                    8:0    0   64G  0 disk
 ├─sda1                 8:1    0  512M  0 part /boot/efi
@@ -30,10 +37,6 @@ sdb                    8:16   0  2.5G  0 disk
 sdc                    8:32   0  2.5G  0 disk
 ├─sdc1                 8:33   0    2G  0 part
 └─sdc2                 8:34   0  511M  0 part
-
-5.  
-sudo sfdisk -d /dev/sdb > sdb-dump.txt
-sudo sfdisk /dev/sdc < sdb-dump.txt
 
 6. 
  sudo mdadm --create --verbose /dev/md1 --level=1 --raid-devices=2 /dev/sdb1 /dev/sdc1
@@ -108,3 +111,4 @@ sdc                         8:32   0  2.5G  0 disk
 vagrant@vagrant:~$ sudo gzip -t /tmp/new-vol/test.gz
 vagrant@vagrant:~$ echo $?
 0
+20.
