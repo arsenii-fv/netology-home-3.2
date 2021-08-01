@@ -5,7 +5,7 @@
   канал 32, 36, 40, 44, 48, 52, 56, 60, 64, 100, 104, 108, 112,
   116, 120, 124,128, 136, 140, 144, 153, 157, 161, 165, 169, 173, 
   177, 183, 188, 196
- итого 30 неперекрывающихся канала
+ итого 30 неперекрывающихся каналов
  если взять шириной 10 МГц число каналов увеличится в 2 раза 
 
 Apple, Inc
@@ -93,4 +93,7 @@ tcpdump: listening on eth0, link-type EN10MB (Ethernet), capture size 262144 byt
 1 packet captured
 46 packets received by filter
 13 packets dropped by kernel
+
 14.
+sudo tcpdump -i eth0 -w pac.pcap
+sudo tshark -r /home/vagrant/pac.pcap
