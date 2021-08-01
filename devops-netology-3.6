@@ -97,3 +97,7 @@ tcpdump: listening on eth0, link-type EN10MB (Ethernet), capture size 262144 byt
 14.
 sudo tcpdump -i eth0 -w pac.pcap
 sudo tshark -r /home/vagrant/pac.pcap
+20:18:59.238144 IP (tos 0x10, ttl 64, id 15242, offset 0, flags [DF], proto TCP (6), length 84)
+    10.0.2.15.22 > 10.0.2.2.51466: Flags [P.], cksum 0x1857 (incorrect -> 0xc967), seq 468:512, ack 1, win 64032, length 44
+   Флаг DF -  Don’t fragment 
+        MF - more fragments 
