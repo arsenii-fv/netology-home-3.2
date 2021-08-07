@@ -2,16 +2,34 @@
  1Гбит/с = 128Мбайт/с
  300мс = 0.3с
  0.3*128 = 38.4 (Мбайт) размер окна TCP без потерь
+
+2. 
  0.3*128*sqr(0.01) = 3.84 (Мбайт) размер окна TCP с потерями 1%
 
-2.
+
 
 3.
-
+  
 4.
-
+  
 5.
+ dig google.co.uk ANY
+google.co.uk.           86400   IN      CAA     0 issue "pki.goog"
+google.co.uk.           300     IN      MX      0 smtp.google.com.
+google.co.uk.           60      IN      SOA     ns1.google.com. dns-admin.google.com. 389147556 900 900 1800 60
+google.co.uk.           300     IN      TXT     "v=spf1 -all"
+google.co.uk.           162     IN      AAAA    2a00:1450:4010:c03::5e
+google.co.uk.           300     IN      A       209.85.233.94
+google.co.uk.           35462   IN      NS      ns1.google.com.
+google.co.uk.           35462   IN      NS      ns3.google.com.
+google.co.uk.           35462   IN      NS      ns4.google.com.
+google.co.uk.           35462   IN      NS      ns2.google.com.
 
+ dig www. ANY
+;; ANSWER SECTION:
+www.                    9       IN      A       192.168.178.1
+www.                    9       IN      NS      fritz.box.
+  
 6.
     /25 2^7-2 =126 адресов доступно
     
