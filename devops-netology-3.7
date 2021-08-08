@@ -13,6 +13,27 @@
 4.
   
 5.
+ dig www.co.uk. ANY
+
+; <<>> DiG 9.16.1-Ubuntu <<>> www.co.uk. ANY
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 65286
+;; flags: qr rd ra; QUERY: 1, ANSWER: 4, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 65494
+;; QUESTION SECTION:
+;www.co.uk.                     IN      ANY
+
+;; ANSWER SECTION:
+www.co.uk.              86400   IN      SOA     ns0.bt.net. hostmaster.bt.net. 8 28800 7200 604800 86400
+www.co.uk.              86400   IN      NS      ns0.bt.net.
+www.co.uk.              86400   IN      NS      ns1.bt.net.
+www.co.uk.              86400   IN      NS      ns2.bt.net.
+
+;; Query time: 104 msec
+
  dig google.co.uk ANY
 google.co.uk.           86400   IN      CAA     0 issue "pki.goog"
 google.co.uk.           300     IN      MX      0 smtp.google.com.
