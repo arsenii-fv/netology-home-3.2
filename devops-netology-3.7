@@ -6,11 +6,18 @@
 2. 
  0.3*128*sqr(0.01) = 3.84 (Мбайт) размер окна TCP с потерями 1%
 
-
-
 3.
-  
+     Max Windows Size = 65535
+     RTT = 0.007  (SpeedTest)
+     65535/0.007 = 9.4 MB/s  9.4*8=75 (Mb/s) 
+     
+     Max Windows Size = 262656 (Wireshark)
+     RTT = 0.05  (Wireshark)
+     262656/0.05 = 5.2 MB/s  5.2*8=42 (Mb/s) 
+     
+     При увеличении размера Windows Size можно увеличить пропускную способность.
 4.
+ 
   
 5.
  dig www.co.uk. ANY
