@@ -20,44 +20,44 @@
  
   
 5.
- dig www.co.uk. ANY
+  dig NS uk.
+;uk.                            IN      NS
+;; ANSWER SECTION:
+uk.                     6789    IN      NS      nsb.nic.uk.
+uk.                     6789    IN      NS      nsc.nic.uk.
+uk.                     6789    IN      NS      dns4.nic.uk.
+uk.                     6789    IN      NS      nsd.nic.uk.
+uk.                     6789    IN      NS      dns3.nic.uk.
+uk.                     6789    IN      NS      dns2.nic.uk.
+uk.                     6789    IN      NS      nsa.nic.uk.
+uk.                     6789    IN      NS      dns1.nic.uk.
 
-; <<>> DiG 9.16.1-Ubuntu <<>> www.co.uk. ANY
-;; global options: +cmd
-;; Got answer:
-;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 65286
-;; flags: qr rd ra; QUERY: 1, ANSWER: 4, AUTHORITY: 0, ADDITIONAL: 1
+;; Query time: 0 msec
+;; SERVER: 127.0.0.53#53(127.0.0.53)
+;; WHEN: Tue Aug 17 22:35:47 UTC 2021
+;; MSG SIZE  rcvd: 183
 
-;; OPT PSEUDOSECTION:
-; EDNS: version: 0, flags:; udp: 65494
-;; QUESTION SECTION:
-;www.co.uk.                     IN      ANY
+ dig NS co.uk.
+;co.uk.                         IN      NS
+;; ANSWER SECTION:
+co.uk.                  6875    IN      NS      nsa.nic.uk.
+co.uk.                  6875    IN      NS      nsb.nic.uk.
+co.uk.                  6875    IN      NS      dns4.nic.uk.
+co.uk.                  6875    IN      NS      dns2.nic.uk.
+co.uk.                  6875    IN      NS      nsc.nic.uk.
+co.uk.                  6875    IN      NS      dns1.nic.uk.
+co.uk.                  6875    IN      NS      dns3.nic.uk.
+co.uk.                  6875    IN      NS      nsd.nic.uk.
+ 
+ dig NS  google.co
+;google.co.                     IN      NS
 
 ;; ANSWER SECTION:
-www.co.uk.              86400   IN      SOA     ns0.bt.net. hostmaster.bt.net. 8 28800 7200 604800 86400
-www.co.uk.              86400   IN      NS      ns0.bt.net.
-www.co.uk.              86400   IN      NS      ns1.bt.net.
-www.co.uk.              86400   IN      NS      ns2.bt.net.
-
-;; Query time: 104 msec
-
- dig google.co.uk ANY
-google.co.uk.           86400   IN      CAA     0 issue "pki.goog"
-google.co.uk.           300     IN      MX      0 smtp.google.com.
-google.co.uk.           60      IN      SOA     ns1.google.com. dns-admin.google.com. 389147556 900 900 1800 60
-google.co.uk.           300     IN      TXT     "v=spf1 -all"
-google.co.uk.           162     IN      AAAA    2a00:1450:4010:c03::5e
-google.co.uk.           300     IN      A       209.85.233.94
-google.co.uk.           35462   IN      NS      ns1.google.com.
-google.co.uk.           35462   IN      NS      ns3.google.com.
-google.co.uk.           35462   IN      NS      ns4.google.com.
-google.co.uk.           35462   IN      NS      ns2.google.com.
-
- dig www. ANY
-;; ANSWER SECTION:
-www.                    9       IN      A       192.168.178.1
-www.                    9       IN      NS      fritz.box.
-  
+google.co.              86400   IN      NS      ns2.google.com.
+google.co.              86400   IN      NS      ns3.google.com.
+google.co.              86400   IN      NS      ns4.google.com.
+google.co.              86400   IN      NS      ns1.google.com. 
+ 
 6.
     /25 2^7-2 =126 адресов доступно
     
