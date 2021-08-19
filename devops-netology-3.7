@@ -16,9 +16,37 @@
      262656/0.05 = 5.2 MB/s  5.2*8=42 (Mb/s) 
      
      При увеличении размера Windows Size можно увеличить пропускную способность.
+
 4.
+ curl -I http://www.netology.ru
+ Первый запрос о DNS записи идет на корневой сервер (.) На этом сервере ищется запись которая отвечает за зону ru 
+ Следующий запрос идет на домены верхнего уровня (TLD) ru. На сервере этого уровня хранится запись имени netology.ru
+ Следующий запрос идет на домен второго уровня
+ И последний на домен третьего уровня где хранится запись об ip адресе сайта netology.ru
  
-  
+Клиенту возвращается запись о заголовке сайта, что мы и видим в консоле
+
+HTTP/1.1 301 Moved Permanently
+Date: Thu, 19 Aug 2021 19:22:20 GMT
+Connection: keep-alive
+Cache-Control: max-age=3600
+Expires: Thu, 19 Aug 2021 20:22:20 GMT
+Location: https://netology.ru/
+Server: cloudflare
+CF-RAY: 6815c0045a6cf13a-ARN
+alt-svc: h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443"; ma=86400
+
+curl -I http://www.netology.ru
+HTTP/1.1 301 Moved Permanently
+Date: Thu, 19 Aug 2021 19:48:50 GMT
+Connection: keep-alive
+Cache-Control: max-age=3600
+Expires: Thu, 19 Aug 2021 20:48:50 GMT
+Location: https://www.netology.ru/
+Server: cloudflare
+CF-RAY: 6815e6d918a10d4e-ARN
+alt-svc: h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443"; ma=86400
+
 5.
   dig NS uk.
 ;uk.                            IN      NS
