@@ -33,14 +33,50 @@ sudo ip neighbour flush 10.0.2.3
 ip n show
 10.0.2.2 dev eth0 lladdr 52:54:00:12:35:02 REACHABLE
 
+vagrant@vagrant:~$ sudo systemd-resolve --flush-caches
+vagrant@vagrant:~$ sudo systemd-resolve --statistics
+DNSSEC supported by current servers: no
 
- curl -I http://www.netology.ru
- Первый запрос о DNS записи идет на корневой сервер (.) На этом сервере ищется запись которая отвечает за зону ru 
- Следующий запрос идет на домены верхнего уровня (TLD) ru. На сервере этого уровня хранится запись имени netology.ru
- Следующий запрос идет на домен второго уровня
- И последний на домен третьего уровня где хранится запись об ip адресе сайта netology.ru
- 
-Клиенту возвращается запись о заголовке сайта, что мы и видим в консоле
+Transactions
+Current Transactions: 0
+  Total Transactions: 4
+
+Cache
+  Current Cache Size: 0
+          Cache Hits: 1
+        Cache Misses: 3
+
+DNSSEC Verdicts
+              Secure: 0
+            Insecure: 0
+               Bogus: 0
+       Indeterminate: 0
+
+ sudo tcpdump host www.netology.ru -w net11.pcap
+tcpdump: listening on eth0, link-type EN10MB (Ethernet), capture size 262144 bytes
+^C11 packets captured
+15 packets received by filter
+0 packets dropped by kernel
+vagrant@vagrant:~$ tcpdump -r net11.pcap
+reading from file net11.pcap, link-type EN10MB (Ethernet)
+17:47:57.009438 IP 10.0.2.15.46938 > 104.22.49.171.http: Flags [S], seq 200061366, win 64240, options [mss 1460,sackOK,TS val 1642295480 ecr 0,nop,wscale 7], length 0
+17:47:57.012826 IP 104.22.49.171.http > 10.0.2.15.46938: Flags [S.], seq 115712001, ack 200061367, win 65535, options [mss 1460], length 0
+17:47:57.012859 IP 10.0.2.15.46938 > 104.22.49.171.http: Flags [.], ack 1, win 64240, length 0
+17:47:57.012935 IP 10.0.2.15.46938 > 104.22.49.171.http: Flags [P.], seq 1:77, ack 1, win 64240, length 76: HTTP: HEAD / HTTP/1.1
+17:47:57.013107 IP 104.22.49.171.http > 10.0.2.15.46938: Flags [.], ack 77, win 65535, length 0
+17:47:57.023556 IP 104.22.49.171.http > 10.0.2.15.46938: Flags [P.], seq 1:349, ack 77, win 65535, length 348: HTTP: HTTP/1.1 301 Moved Permanently
+17:47:57.023573 IP 10.0.2.15.46938 > 104.22.49.171.http: Flags [.], ack 349, win 63892, length 0
+17:47:57.025649 IP 10.0.2.15.46938 > 104.22.49.171.http: Flags [F.], seq 77, ack 349, win 63892, length 0
+17:47:57.025748 IP 104.22.49.171.http > 10.0.2.15.46938: Flags [.], ack 78, win 65535, length 0
+17:47:57.028520 IP 104.22.49.171.http > 10.0.2.15.46938: Flags [F.], seq 349, ack 78, win 65535, length 0
+17:47:57.028541 IP 10.0.2.15.46938 > 104.22.49.171.http: Flags [.], ack 350, win 63892, length 0
+  1 - клиент с IP 10.0.2.15 порт 46938 запрашивает сервер с IP 104.22.49.171 порт 80 на установление соединения флаг S, размер окна 64240 байт , коэффициент          
+       масштабирования 7 (т.е. макс размер окна 64240*7)
+  2 - сервер отправляет клиенту ответ на установление соединения с подтверждением 200061366+1 
+  3 - клиент отвечает  - подтверждаю 
+  4. и отправляет запрос на сервер с длиной 76 байт ()
+
+
 
 HTTP/1.1 301 Moved Permanently
 Date: Thu, 19 Aug 2021 19:22:20 GMT
@@ -50,17 +86,6 @@ Expires: Thu, 19 Aug 2021 20:22:20 GMT
 Location: https://netology.ru/
 Server: cloudflare
 CF-RAY: 6815c0045a6cf13a-ARN
-alt-svc: h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443"; ma=86400
-
-curl -I http://www.netology.ru
-HTTP/1.1 301 Moved Permanently
-Date: Thu, 19 Aug 2021 19:48:50 GMT
-Connection: keep-alive
-Cache-Control: max-age=3600
-Expires: Thu, 19 Aug 2021 20:48:50 GMT
-Location: https://www.netology.ru/
-Server: cloudflare
-CF-RAY: 6815e6d918a10d4e-ARN
 alt-svc: h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443"; ma=86400
 
 5.
