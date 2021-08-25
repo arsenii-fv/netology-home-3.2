@@ -74,19 +74,23 @@ reading from file net11.pcap, link-type EN10MB (Ethernet)
        масштабирования 7 (т.е. макс размер окна 64240*7)
   2 - сервер отправляет клиенту ответ на установление соединения с подтверждением 200061366+1 
   3 - клиент отвечает  - подтверждаю 
-  4. и отправляет запрос на сервер с длиной 76 байт ()
-
-
-
-HTTP/1.1 301 Moved Permanently
-Date: Thu, 19 Aug 2021 19:22:20 GMT
-Connection: keep-alive
-Cache-Control: max-age=3600
-Expires: Thu, 19 Aug 2021 20:22:20 GMT
-Location: https://netology.ru/
-Server: cloudflare
-CF-RAY: 6815c0045a6cf13a-ARN
-alt-svc: h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443"; ma=86400
+  4 -  и отправляет запрос на сервер с длиной 76 байт ( curl -I http://netology.ru)
+  5 - сервер отвечает запрос получил  
+  6 - сервер отправляет клиенту ответ длиной 348 байт
+      HTTP/1.1 301 Moved Permanently
+      Date: Thu, 19 Aug 2021 19:22:20 GMT
+      Connection: keep-alive
+      Cache-Control: max-age=3600
+      Expires: Thu, 19 Aug 2021 20:22:20 GMT
+      Location: https://netology.ru/
+      Server: cloudflare
+      CF-RAY: 6815c0045a6cf13a-ARN
+      alt-svc: h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443"; ma=8640
+  7 - клиент отвечает пакет получит
+  8 - клиент отправляет на сервер запрос на завершение сеанса
+  9 - сервер отвечает запрос получил
+  10 - сервер отправляет клиенту запрос на завершение сеанса с подтверждением
+  11 - клиент отвечает подтверждением
 
 5.
   dig NS uk.
