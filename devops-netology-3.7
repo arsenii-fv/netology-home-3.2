@@ -22,6 +22,18 @@
      При увеличении размера Windows Size можно увеличить пропускную способность.
 
 4.
+ Очистим arp таблицу
+sudo ip n
+10.0.2.2 dev eth0 lladdr 52:54:00:12:35:02 REACHABLE
+10.0.2.3 dev eth0 lladdr 52:54:00:12:35:03 STALE
+
+sudo ip neighbour flush 10.0.2.2
+sudo ip neighbour flush 10.0.2.3
+
+ip n show
+10.0.2.2 dev eth0 lladdr 52:54:00:12:35:02 REACHABLE
+
+
  curl -I http://www.netology.ru
  Первый запрос о DNS записи идет на корневой сервер (.) На этом сервере ищется запись которая отвечает за зону ru 
  Следующий запрос идет на домены верхнего уровня (TLD) ru. На сервере этого уровня хранится запись имени netology.ru
