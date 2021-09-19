@@ -1,0 +1,84 @@
+1.
+Пришлось изменить vagrant, не поднимались адреса ...10 ...60 ...90
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+#netology1
+ config.vm.define "netology1" do |net|
+ net.vm.box = "bento/ubuntu-20.04"
+ net.vm.hostname = "netology1"
+ net.vm.network "private_network", auto_config: false, virtualbox__intnet: true
+  net.vm.provision "shell" do |s|
+        s.inline = "hostname netology1;"\
+          "apt update;"\
+		  "apt upgrade;"\
+		  "ip addr add 172.28.128.10/24 dev eth1;"\
+		  "ip link set dev eth1 up;"\
+		  "apt install -y ipvsadm;"\
+		  "apt install -y mc;"\
+          "apt install -y nginx;"\
+		  "ip addr add 172.28.128.200/32 dev eth1 label eth1:200;"\
+		  "ipvsadm -A -t 172.28.128.200:80 -s rr;"\
+		  "ipvsadm -a -t 172.28.128.200:80 -r 172.28.128.10:80 -g -w 1;"\
+		  "ipvsadm -a -t 172.28.128.200:80 -r 172.28.128.60:80 -g -w 1;"\
+        #s.args = [k, "172.28.128.#{v}/24"]
+      end
+ end	  
+
+#netology2
+ config.vm.define "netology2" do |net|
+ net.vm.box = "bento/ubuntu-20.04"
+ net.vm.hostname = "netology2"
+ net.vm.network "private_network",auto_config: false, virtualbox__intnet: true
+  net.vm.provision "shell" do |s|
+        s.inline = "hostname netology2;"\
+          "apt update;"\
+		  "apt upgrade;"\
+		  "ip addr add 172.28.128.60/24 dev eth1;"\
+		  "ip addr add 172.28.128.200/32 dev lo label lo:200;"\
+          "ip link set dev eth1 up;"\
+		  "apt install -y mc;"\
+          "apt install -y nginx;"
+        #s.args = [k, "172.28.128.#{v}/24"]
+      end
+ end
+
+#netology3
+ config.vm.define "netology3" do |net|
+ net.vm.box = "bento/ubuntu-20.04"
+ net.vm.hostname = "netology3"
+ net.vm.network "private_network",auto_config: false, virtualbox__intnet: true
+  net.vm.provision "shell" do |s|
+        s.inline = "hostname netology3;"\
+          "apt update;"\
+		  "apt upgrade;"\
+		  "ip addr add 172.28.128.90/24 dev eth1;"\
+          "ip link set dev eth1 up;"\
+		  		  "apt install -y mc;"\
+          "apt install -y nginx;"
+        #s.args = [k, "172.28.128.#{v}/24"]
+      end
+ end
+
+end
+
+Вывод файла tcpdump
+vagrant@netology1:~$ sudo tcpdump -r packet.pcap
+10:13:55.612771 IP 172.28.128.90.37722 > 172.28.128.200.http: Flags [.], ack 249, win 501, options [nop,nop,TS val 2027234238 ecr 648364474], length 0
+10:14:00.621549 ARP, Request who-has 172.28.128.90 tell 172.28.128.10, length 28
+10:14:00.621584 ARP, Request who-has 172.28.128.60 tell 172.28.128.10, length 28
+10:14:00.621796 ARP, Reply 172.28.128.90 is-at 08:00:27:d1:4d:50 (oui Unknown), length 46
+10:14:00.621796 ARP, Reply 172.28.128.60 is-at 08:00:27:bf:9c:76 (oui Unknown), length 46
+Происходит arp запрос: у кого есть адрес 172.28.128.90
+Это длится какое-то время, поэтому зависают соединения в состоянии InActConn
+authd/identd
+vagrant@netology1:~$ sudo ip n show
+10.0.2.3 dev eth0 lladdr 52:54:00:12:35:03 STALE
+172.28.128.60 dev eth1 lladdr 08:00:27:bf:9c:76 STALE
+172.28.128.90 dev eth1 lladdr 08:00:27:d1:4d:50 STALE
+10.0.2.2 dev eth0 lladdr 52:54:00:12:35:02 DELAY
+
+2.
+3.
