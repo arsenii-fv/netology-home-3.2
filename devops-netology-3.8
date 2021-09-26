@@ -81,4 +81,145 @@ vagrant@netology1:~$ sudo ip n show
 10.0.2.2 dev eth0 lladdr 52:54:00:12:35:02 DELAY
 
 2.
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+#FLOATING_IP
+ config.vm.define "floating-ip" do |net|
+ net.vm.box = "bento/ubuntu-20.04"
+ net.vm.hostname = "floating-ip"
+ net.vm.network "private_network", auto_config: false, virtualbox__intnet: true
+  net.vm.provision "shell" do |s|
+        s.inline = "hostname floating-ip;"\
+          "apt update;"\
+		  "apt upgrade;"\
+		  "ip addr add 172.28.128.10/24 dev eth1;"\
+		  "ip link set dev eth1 up;"
+		  "echo 'net.ipv4.ip_nonlocal_bind=1' >> /etc/sysctl.conf;"\
+                  "echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf;"\
+                  "sysctl -p;"   		  
+		  "apt install -y mc;"
+		 end
+ end	  
+
+#BALANCER1
+ config.vm.define "balancer1" do |net|
+ net.vm.box = "bento/ubuntu-20.04"
+ net.vm.hostname = "balancer1"
+ net.vm.network "private_network", auto_config: false, virtualbox__intnet: true
+  net.vm.provision "shell" do |s|
+        s.inline = "hostname balancer1;"\
+          "apt update;"\
+		  "apt upgrade;"\
+		  "ip addr add 172.28.128.60/24 dev eth1;"\
+		  "ip link set dev eth1 up;"\
+		  "apt install -y keepalived;"\
+		  "touch /etc/keepalived/keepalived.conf;"\
+		  "apt install -y mc;"
+		end
+ end	  
+
+#BALANCER2
+ config.vm.define "balancer2" do |net|
+ net.vm.box = "bento/ubuntu-20.04"
+ net.vm.hostname = "balancer2"
+ net.vm.network "private_network", auto_config: false, virtualbox__intnet: true
+  net.vm.provision "shell" do |s|
+        s.inline = "hostname balancer2;"\
+          "apt update;"\
+		  "apt upgrade;"\
+		  "ip addr add 172.28.128.80/24 dev eth1;"\
+		  "ip link set dev eth1 up;"\
+		  "apt install -y keepalived;"\
+		  "touch /etc/keepalived/keepalived.conf;"\
+		  "apt install -y mc;"
+		end
+ end	  
+
+#WEB SERVER1
+ config.vm.define "web-server1" do |net|
+ net.vm.box = "bento/ubuntu-20.04"
+ net.vm.hostname = "web-server1"
+ net.vm.network "private_network",auto_config: false, virtualbox__intnet: true
+  net.vm.provision "shell" do |s|
+        s.inline = "hostname web-server1;"\
+          "apt update;"\
+		  "apt upgrade;"\
+		  "ip addr add 172.28.128.91/24 dev eth1;"\
+                  "ip link set dev eth1 up;"\
+		  "apt install -y mc;"\
+                  "apt install -y nginx;"\
+                  "echo “this is first webserver” > /usr/share/nginx/html/index.html;" 
+      end
+ end
+
+#WEB SERVER2
+ config.vm.define "web-server2" do |net|
+ net.vm.box = "bento/ubuntu-20.04"
+ net.vm.hostname = "web-server2"
+ net.vm.network "private_network",auto_config: false, virtualbox__intnet: true
+  net.vm.provision "shell" do |s|
+        s.inline = "hostname web-server2;"\
+          "apt update;"\
+		  "apt upgrade;"\
+		  "ip addr add 172.28.128.92/24 dev eth1;"\
+          "ip link set dev eth1 up;"\
+		  "apt install -y mc;"\
+          "apt install -y nginx;"\
+          "echo “this is second webserver” > /usr/share/nginx/html/index.html;" 
+      end
+ end
+
+end	
+
+vrrp_script chk_nginx {
+   script "/usr/bin/curl -I 172.28.128.91"
+   script "/usr/bin/curl -I 172.28.128.92"
+   interval 2
+}
+
+vrrp_instance VI_1 {
+   state MASTER
+   interface eth1
+   virtual_router_id 50
+   priority 150
+   advert_int 1
+   authentication {
+    auth_type PASS
+    auth_pass netology_work
+   }
+virtual_ipaddress {
+172.28.128.10/24 dev eth1
+}
+track_script {
+   chk_nginx
+}
+}
+
+vrrp_script chk_nginx {
+   script "/usr/bin/curl -I 172.28.128.92"
+   script "/usr/bin/curl -I 172.28.128.91"
+   interval 2
+}
+
+vrrp_instance VI_1 {
+   state BACKUP
+   interface eth1
+   virtual_router_id 50
+   priority 50
+   advert_int 1
+   authentication {
+    auth_type PASS
+    auth_pass netology_work
+   }
+virtual_ipaddress {
+172.28.128.10/24 dev eth1
+}
+track_script {
+   chk_nginx
+}
+}
+
 3.
