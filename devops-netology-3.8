@@ -66,19 +66,18 @@ end
 
 Вывод файла tcpdump
 vagrant@netology1:~$ sudo tcpdump -r packet.pcap
-10:13:55.612771 IP 172.28.128.90.37722 > 172.28.128.200.http: Flags [.], ack 249, win 501, options [nop,nop,TS val 2027234238 ecr 648364474], length 0
-10:14:00.621549 ARP, Request who-has 172.28.128.90 tell 172.28.128.10, length 28
-10:14:00.621584 ARP, Request who-has 172.28.128.60 tell 172.28.128.10, length 28
-10:14:00.621796 ARP, Reply 172.28.128.90 is-at 08:00:27:d1:4d:50 (oui Unknown), length 46
-10:14:00.621796 ARP, Reply 172.28.128.60 is-at 08:00:27:bf:9c:76 (oui Unknown), length 46
-Происходит arp запрос: у кого есть адрес 172.28.128.90
+20:13:17.641475 IP 172.28.128.200.http > 172.28.128.90.60354: Flags [F.], seq 248, ack 81, win 509, options [nop,nop,TS val 1856728619 ecr 1106391136], length 0
+20:13:17.641556 IP 172.28.128.90.60354 > 172.28.128.200.http: Flags [.], ack 249, win 501, options [nop,nop,TS val 1106391136 ecr 1856728619], length 0
+20:13:22.561896 ARP, Request who-has 172.28.128.60 tell 172.28.128.10, length 28
+20:13:22.562284 ARP, Reply 172.28.128.60 is-at 08:00:27:7b:27:18 (oui Unknown), length 46
+20:17:32.161734 IP6 netology1 > ip6-allrouters: ICMP6, router solicitation, length 16
+Происходит arp запрос: у кого есть адрес 172.28.128.60
 Это длится какое-то время, поэтому зависают соединения в состоянии InActConn
-authd/identd
 vagrant@netology1:~$ sudo ip n show
+10.0.2.2 dev eth0 lladdr 52:54:00:12:35:02 REACHABLE
 10.0.2.3 dev eth0 lladdr 52:54:00:12:35:03 STALE
-172.28.128.60 dev eth1 lladdr 08:00:27:bf:9c:76 STALE
-172.28.128.90 dev eth1 lladdr 08:00:27:d1:4d:50 STALE
-10.0.2.2 dev eth0 lladdr 52:54:00:12:35:02 DELAY
+172.28.128.60 dev eth1 lladdr 08:00:27:7b:27:18 STALE
+172.28.128.90 dev eth1 lladdr 08:00:27:0d:cd:e9 STALE
 
 2.
 # -*- mode: ruby -*-
