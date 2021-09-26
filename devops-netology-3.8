@@ -221,5 +221,33 @@ track_script {
    chk_nginx
 }
 }
+vagrant@balancer1:~$ ip a show dev eth1
+3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:00:36:58 brd ff:ff:ff:ff:ff:ff
+    inet 172.28.128.60/24 scope global eth1
+       valid_lft forever preferred_lft forever
+    inet 172.28.128.10/24 scope global secondary eth1
+       valid_lft forever preferred_lft forever
+   vagrant@balancer1:~$ sudo ip link set eth1 down
 
+
+vagrant@balancer1:~$ sudo ip link set eth1 down
+vagrant@balancer1:~$ ip a show dev eth1
+3: eth1: <BROADCAST,MULTICAST> mtu 1500 qdisc fq_codel state DOWN group default qlen 1000
+    link/ether 08:00:27:00:36:58 brd ff:ff:ff:ff:ff:ff
+    inet 172.28.128.60/24 scope global eth1
+       valid_lft forever preferred_lft forever
+vagrant@balancer2:~$ ip a show dev eth1
+3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:64:76:21 brd ff:ff:ff:ff:ff:ff
+    inet 172.28.128.80/24 scope global eth1
+       valid_lft forever preferred_lft forever
+    inet 172.28.128.10/24 scope global secondary eth1
+       valid_lft forever preferred_lft forever
+    
 3.
+ Можно использовать 2 VIP
+ На балансировщике настроить два интефейса.
+ virtual_ipaddress {
+ x.x.x.x dev eth1
+ x.x.x.x dev eth2	 
