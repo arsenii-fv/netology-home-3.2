@@ -1,0 +1,58 @@
+1.
+2.
+3.
+  $sudo apt install apache2 
+  $sudo systemctl status apache2
+  $sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/apache-selfssl.key 
+        -out /etc/ssl/certs/apache-selfssl.crt -subj "/C=RU/ST=Moscow/L=Moscow Name/CN=www.exam_ssl.com"
+  $sudo a2enmod ssl
+  $sudo systemctl restart apache2
+  $sudo systemctl status apache2
+  
+  $sudo vim /etc/apache2/sites-avialable/default-ssl.conf
+            SSLCertificateFile      /etc/ssl/certs/apache-selfssl.crt
+            SSLCertificateKeyFile   /etc/ssl/private/apache-selfssl.key
+  И открыть порт 443 на localhost в VirtualBox
+
+4.
+ ~/testssl.sh$ ./testssl.sh -U --sneaky https://wwv.zvuch.com/radio-online
+
+ Start 2021-10-08 02:00:20        -->> 185.22.234.117:443 (wwv.zvuch.com) <<--
+
+ rDNS (185.22.234.117):  hosted-by.ihc.ru.
+ Service detected:       HTTP
+
+
+ Testing vulnerabilities
+
+ Heartbleed (CVE-2014-0160)                not vulnerable (OK), no heartbeat extension
+ CCS (CVE-2014-0224)                       not vulnerable (OK)
+ Ticketbleed (CVE-2016-9244), experiment.  not vulnerable (OK)
+ ROBOT                                     not vulnerable (OK)
+ Secure Renegotiation (RFC 5746)           supported (OK)
+ Secure Client-Initiated Renegotiation     not vulnerable (OK)
+ CRIME, TLS (CVE-2012-4929)                not vulnerable (OK)
+ BREACH (CVE-2013-3587)                    potentially NOT ok, "gzip" HTTP compression detected. - only supplied "/radio-online" tested
+                                           Can be ignored for static pages or if no secrets in the page
+ POODLE, SSL (CVE-2014-3566)               not vulnerable (OK)
+ TLS_FALLBACK_SCSV (RFC 7507)              Downgrade attack prevention supported (OK)
+ SWEET32 (CVE-2016-2183, CVE-2016-6329)    not vulnerable (OK)
+ FREAK (CVE-2015-0204)                     not vulnerable (OK)
+ DROWN (CVE-2016-0800, CVE-2016-0703)      not vulnerable on this host and port (OK)
+                                           make sure you don't use this certificate elsewhere with SSLv2 enabled services
+                                           https://censys.io/ipv4?q=8E384C080C5989F0AE43E5C731EA880CC94FA5EB6F1BF5D286F907B972FC5E85 could help you to find out
+ LOGJAM (CVE-2015-4000), experimental      not vulnerable (OK): no DH EXPORT ciphers, no DH key detected with <= TLS 1.2
+ BEAST (CVE-2011-3389)                     TLS1: ECDHE-RSA-AES128-SHA ECDHE-RSA-AES256-SHA AES128-SHA
+                                           VULNERABLE -- but also supports higher protocols  TLSv1.1 TLSv1.2 (likely mitigated)
+ LUCKY13 (CVE-2013-0169), experimental     potentially VULNERABLE, uses cipher block chaining (CBC) ciphers with TLS. Check patches
+ Winshock (CVE-2014-6321), experimental    not vulnerable (OK) - ARIA, CHACHA or CCM ciphers found
+ RC4 (CVE-2013-2566, CVE-2015-2808)        no RC4 ciphers detected (OK)
+
+
+ Done 2021-10-08 02:01:24 [  67s] -->> 185.22.234.117:443 (wwv.zvuch.com) <<--
+ 
+5.
+6.
+7.
+8.
+9.
