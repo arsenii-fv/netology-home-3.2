@@ -69,7 +69,32 @@
    netology2$ ssh -p 2205 vagrant@172.28.128.10
  
 6.
-   AuthorizedKeysFile   .ssh/vagrant_keys
-7.
-8.
-9.
+netology2$ vim .ssh/config
+ Host vag_net
+ HostName 172.28.128.10
+ Port 2205
+
+ netology1$ vim /etc/ssh/sshd_config  
+AuthorizedKeysFile   .ssh/vagrant_keys
+
+vagrant@netology2:~$ ssh vag_net
+Welcome to Ubuntu 20.04.1 LTS (GNU/Linux 5.4.0-58-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Sun 10 Oct 2021 08:14:04 PM UTC
+
+  System load:  0.0               Processes:             94
+  Usage of /:   2.4% of 61.31GB   Users logged in:       1
+  Memory usage: 17%               IPv4 address for eth0: 10.0.2.15
+  Swap usage:   0%                IPv4 address for eth1: 172.28.128.10
+
+
+This system is built by the Bento project by Chef Software
+More information can be found at https://github.com/chef/bento
+Last login: Sun Oct 10 20:13:47 2021 from 172.28.128.20
+vagrant@netology1:~$
+
+
