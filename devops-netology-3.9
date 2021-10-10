@@ -52,7 +52,24 @@
  Done 2021-10-08 02:01:24 [  67s] -->> 185.22.234.117:443 (wwv.zvuch.com) <<--
  
 5.
+ netology1$ sudo apt install ssh
+ netology2$ sudo apt install openssh-client
+ netology2$ ssh-keygen
+ netology2$ ssh vagrant@172.28.128.10 mkdir .ssh
+ netology2$ cat .ssh/id_rsa.pub | ssh vagrant@172.28.128.10 "cat >> .ssh/authorized_keys"
+ 
+ netology1$ vim /etc/ssh/sshd_config
+      Port 2205
+      PermitRootLogin no
+      PubkeyAuthentication yes
+      AuthorizedKeysFile    .ssh/authorized_keys2
+      PasswordAuthentication no
+      PermitEmptyPasswords no
+ 
+   netology2$ ssh -p 2205 vagrant@172.28.128.10
+ 
 6.
+   AuthorizedKeysFile   .ssh/vagrant_keys
 7.
 8.
 9.
