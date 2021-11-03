@@ -5,7 +5,9 @@
    d присваиваивается строка со значениями: переменной a,  символ +, переменной b
   
    e=3
-   Будет вычислено значение из суммы переменных a и b
+   ((..)) Выражение стоящее за двойными круглыми скобками BASH воспринимает как арифметическая операция. Переменной
+   e=$((Сумма переменных a and b))
+   
    
 2.
   while ((1==1))
@@ -57,7 +59,8 @@ done
   
 4.
 #!/bin/bash
-while ((1==1))
+# n=0
+while ((1==1)) # Можно n==1
 do
  curl -sm 1 http://192.168.0.1
  if (($?==0))
@@ -65,7 +68,7 @@ do
         echo "192... Host is reachable" >> curl192.log
         else
         echo "192... Host is unreachable" >> curl192.log
-        break
+        break # n=1
  fi
  curl -sm 1 http://173.194.222.113
  if (($? ==0))
@@ -73,15 +76,15 @@ do
         echo "173... Host is reachable" >> curl173.log
         else
         echo "173... Host is unreachable">>curl173.log
-        break
+        break # n=1
  fi
  curl -sm 1 http://87.250.250.242
  if (($? ==0))
         then
-        echo "87... Host is reacheble" >> curl87.log
+        echo "87... Host is reachable" >> curl87.log
         else
         echo "87... Host is unreachable">>curl187.log
-        break
+        break # n=1
  fi
 done
 
