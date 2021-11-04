@@ -6,3 +6,37 @@ a= str(a)
   #b= int(b) #2
 c = a + b
 print (c)
+
+2.
+
+bash_command = ["cd /home/vagrant/netology/sysadm-homeworks","git status"]
+print (bash_command)
+
+result_os = os.popen('&&'.join(bash_command)).read()
+is_change = False
+for result in result_os.split('\n'):
+        if result.find('modified') !=-1:
+                prepare_result = result.replace('\tmodified:  ','')
+                print (prepare_result)
+                #break
+
+ devops-netology-3.3
+ devops-netology-3.4
+ devops-netology-3.4
+
+3.
+#!/usr/bin/env python3
+
+import os
+path_to_git = input('Введите полный путь до репозитория git: ')
+path_to_git = 'cd '+path_to_git
+bash_command = [path_to_git, "git status"]
+#print (bash_command)
+result_os = os.popen('&&'.join(bash_command)).read()
+is_change = False
+for result in result_os.split('\n'):
+        if result.find('modified') !=-1:
+                prepare_result = result.replace('\tmodified:  ','')
+                print (prepare_result)
+                #break
+4.
