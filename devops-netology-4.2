@@ -1,7 +1,8 @@
 1. 
 a = 1
 b = '2'
-a= str(a) 
+
+a= str(a) #1 
   #a= int(a) #2
   #b= int(b) #2
 c = a + b
@@ -40,3 +41,20 @@ for result in result_os.split('\n'):
                 print (prepare_result)
                 #break
 4.
+#!/usr/bin/env python3
+import socket
+all_hosts = ["drive.google.com", "mail.google.com", "google.com"]
+old_ip = ["0","0","0"]
+for i in range(0,len(all_hosts)):
+        get_socket = socket.gethostbyname(all_hosts[i])
+        print(all_hosts[i], " - ", get_socket)
+        old_ip[i]= get_socket
+print("----------------------------------------")
+for i in range(0,len(all_hosts)):
+        get_socket = socket.gethostbyname(all_hosts[i])
+        if old_ip[i] != get_socket:
+                print("[ERROR]",all_hosts[i],"IP mismatch:",old_ip[i],get_socket)
+        else:
+                print("Host`s ip is match: ",old_ip[i],get_socket)
+
+
