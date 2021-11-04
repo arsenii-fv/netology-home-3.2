@@ -57,4 +57,12 @@ for i in range(0,len(all_hosts)):
         else:
                 print("Host`s ip is match: ",old_ip[i],get_socket)
 
-
+vagrant@netology1:~$ ./host.t
+drive.google.com  -  173.194.221.194
+mail.google.com  -  173.194.222.83
+google.com  -  74.125.131.139
+----------------------------------------
+Host`s ip is match:  173.194.221.194 173.194.221.194
+[ERROR] mail.google.com IP mismatch: 173.194.222.83 173.194.222.18
+[ERROR] google.com IP mismatch: 74.125.131.139 74.125.131.101
+vagrant@netology1:~$
