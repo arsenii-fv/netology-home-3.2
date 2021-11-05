@@ -4,4 +4,21 @@
         { "name": "second", "type": "proxy", "ip": "71.78.22.43" }]}
 
 2.
-3.
+#!/usr/bin/env python3
+import socket, json, yaml
+js_host = {}
+ym_host = {}
+all_hosts = ["drive.google.com", "mail.google.com", "google.com"]
+old_ip = ["0","0","0"]
+
+for i in range(0,len(all_hosts)):
+        get_socket = socket.gethostbyname(all_hosts[i])
+        print(all_hosts[i], " - ", get_socket)
+        old_ip[i]= get_socket
+        js_host[all_hosts[i]] = get_socket
+        ym_host[all_hosts[i]] = get_socket
+        with open('host.json', "w") as js1:
+                js1.write(json.dumps(js_host, indent=2))
+        with open("host.yaml", 'w') as ym1:
+                ym1.write(yaml.dump(ym_host))
+
