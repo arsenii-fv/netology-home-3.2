@@ -56,3 +56,26 @@ bond-lacp-rate slow
 6.
  100.64.0.0/26 (2-подсети с 64 адресами)
 
+7.
+ $ip n
+ 10.0.2.2 dev eth0 lladdr 52:54:00:12:35:02 DELAY
+ 10.0.2.3 dev eth0 lladdr 52:54:00:12:35:03 STALE
+ $ sudo ip n flus 10.0.2.3
+vagrant@netology1:~$ ip n
+10.0.2.2 dev eth0 lladdr 52:54:00:12:35:02 DELAY
+
+Windows
+arp -a
+Interface: 192.168.178.22 --- 0xb
+  Internet Address      Physical Address      Type
+  192.168.178.1         44-4e-6d-ef-0f-fa     dynamic
+  192.168.178.23        7a-3d-b0-02-b9-03     dynamic
+  192.168.178.255       ff-ff-ff-ff-ff-ff     static
+  224.0.0.22            01-00-5e-00-00-16     static
+  224.0.0.251           01-00-5e-00-00-fb     static
+  224.0.0.252           01-00-5e-00-00-fc     static
+  239.255.102.18        01-00-5e-7f-66-12     static
+  239.255.255.250       01-00-5e-7f-ff-fa     static
+  255.255.255.255       ff-ff-ff-ff-ff-ff     static
+arp -d  224.0.0.251 
+ 
