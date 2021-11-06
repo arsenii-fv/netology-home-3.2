@@ -3,3 +3,23 @@
 Для Виндовс : netsh interface show interface
 
 2.
+LLDP - протокол дляLinux
+CDP - для CISCO
+пакет LLDP
+# lldpctl
+
+3.
+Коммутаторы L2 работают на 2 уровне модели OSI, управляет MAC адресами, 
+заносит их в таблицу коммутации и согласно этой таблице перераспределяет трафик.
+Пакет vlan
+auto vlan101
+iface vlan101 inet static
+        address 192.168.178.25
+        netmask 255.255.255.0
+        network 192.168.178.0
+        vlan_raw_device eth8s0
+
+4.
+
+
+
