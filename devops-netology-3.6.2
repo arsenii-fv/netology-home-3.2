@@ -20,6 +20,21 @@ iface vlan101 inet static
         vlan_raw_device eth8s0
 
 4.
+Для агрегирования каналов в Cisco может быть использован один из трёх вариантов:
+    LACP (Link Aggregation Control Protocol) стандартный протокол
+    PAgP (Port Aggregation Protocol) проприетарный протокол Cisco
+    Статическое агрегирование без использования протоколов 
 
-
+auto enp2s0
+iface enp2s0 inet manual
+auto enp2s1
+iface enp2s1 inet manual
+auto bond0
+iface bond0 inet static
+address 192.168.178.25/24
+gateway 192.168.178.254
+dns-nameservers 192.168.178.1
+slaves enp2s0 enp2s1
+bond-mode 802.3ad
+bond-lacp-rate slow
 
