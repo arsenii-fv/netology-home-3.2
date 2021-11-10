@@ -53,7 +53,22 @@ Paths: (24 available, best #23, table default)
 2. Создайте dummy0 интерфейс в Ubuntu. Добавьте несколько статических маршрутов. Проверьте таблицу маршрутизации.
 
 3. Проверьте открытые TCP порты в Ubuntu, какие протоколы и приложения используют эти порты? Приведите несколько примеров.
+sudo ss -tlpn
+State         Recv-Q        Send-Q               Local Address:Port               Peer Address:Port       Process
+LISTEN        0             4096                 127.0.0.53%lo:53                      0.0.0.0:*           users:(("systemd-resolve",pid=548,fd=13))
+LISTEN        0             128                        0.0.0.0:22                      0.0.0.0:*           users:(("sshd",pid=1155,fd=3))
+LISTEN        0             4096                       0.0.0.0:111                     0.0.0.0:*           users:(("rpcbind",pid=547,fd=4),("systemd",pid=1,fd=35))
+LISTEN        0             128                           [::]:22                         [::]:*           users:(("sshd",pid=1155,fd=4))
+LISTEN        0             4096                          [::]:111                        [::]:*           users:(("rpcbind",pid=547,fd=6),("systemd",pid=1,fd=37))
+
+
+
 
 4. Проверьте используемые UDP сокеты в Ubuntu, какие протоколы и приложения используют эти порты?
-
+ sudo ss -ulpn
+State         Recv-Q        Send-Q                Local Address:Port               Peer Address:Port       Process
+UNCONN        0             0                     127.0.0.53%lo:53                      0.0.0.0:*           users:(("systemd-resolve",pid=548,fd=12))
+UNCONN        0             0                    10.0.2.15%eth0:68                      0.0.0.0:*           users:(("systemd-network",pid=3501,fd=20))
+UNCONN        0             0                           0.0.0.0:111                     0.0.0.0:*           users:(("rpcbind",pid=547,fd=5),("systemd",pid=1,fd=36))
+UNCONN        0             0                              [::]:111                        [::]:*           users:(("rpcbind",pid=547,fd=7),("systemd",pid=1,fd=38))
 5. Используя diagrams.net, создайте L3 диаграмму вашей домашней сети или любой другой сети, с которой вы работали. 
