@@ -73,3 +73,4 @@ UNCONN        0             0                           0.0.0.0:111             
 UNCONN        0             0                              [::]:111                        [::]:*           users:(("rpcbind",pid=547,fd=7),("systemd",pid=1,fd=38))
 5. Используя diagrams.net, создайте L3 диаграмму вашей домашней сети или любой другой сети, с которой вы работали. 
  [*ссылка на диаграмму*](https://drive.google.com/file/d/1ZdazPz2Ul7uFivf-vcxrQhOsDqHdPfER/view?usp=sharing)
+ 
