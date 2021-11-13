@@ -1,5 +1,5 @@
 # Домашнее задание к занятию "3.8. Компьютерные сети, лекция 3"
-1. Подключитесь к публичному маршрутизатору в интернет. Найдите маршрут к вашему публичному IP
+##1. Подключитесь к публичному маршрутизатору в интернет. Найдите маршрут к вашему публичному IP
 ```
 telnet route-views.routeviews.org
 Username: rviews
@@ -50,8 +50,9 @@ Paths: (24 available, best #23, table default)
       path 7FE15C043A30 RPKI State not found
       rx pathid: 0, tx pathid: 0
   Refresh Epoch 1
-```  
-2. Создайте dummy0 интерфейс в Ubuntu. Добавьте несколько статических маршрутов. Проверьте таблицу маршрутизации.
+```
+##2. Создайте dummy0 интерфейс в Ubuntu. Добавьте несколько статических маршрутов. Проверьте таблицу маршрутизации.
+---
 root@lite:/home/arsen# routel
          target            gateway          source    proto    scope    dev tbl
         default      192.168.178.1                                  enp37s0 
