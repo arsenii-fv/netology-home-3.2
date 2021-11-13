@@ -51,6 +51,49 @@ Paths: (24 available, best #23, table default)
   Refresh Epoch 1
   
 2. Создайте dummy0 интерфейс в Ubuntu. Добавьте несколько статических маршрутов. Проверьте таблицу маршрутизации.
+root@lite:/home/arsen# routel
+         target            gateway          source    proto    scope    dev tbl
+        default      192.168.178.1                                  enp37s0 
+    172.17.0.0/ 16                      172.17.0.1   kernel     linkdocker0 
+ 192.168.100.0/ 24                   192.168.100.1   kernel     link virbr0 
+ 192.168.111.0/ 24                   192.168.111.1   kernel     link virbr1 
+ 192.168.111.0/ 24   192.168.111.1                                   virbr1 
+ 192.168.178.0/ 24                  192.168.178.22   kernel     linkenp37s0 
+       10.8.8.8              local        10.8.8.8   kernel     host dummy0 local
+       10.8.8.8          broadcast        10.8.8.8   kernel     link dummy0 local
+      127.0.0.0          broadcast       127.0.0.1   kernel     link     lo local
+     127.0.0.0/ 8            local       127.0.0.1   kernel     host     lo local
+      127.0.0.1              local       127.0.0.1   kernel     host     lo local
+127.255.255.255          broadcast       127.0.0.1   kernel     link     lo local
+     172.17.0.0          broadcast      172.17.0.1   kernel     linkdocker0 local
+     172.17.0.1              local      172.17.0.1   kernel     hostdocker0 local
+ 172.17.255.255          broadcast      172.17.0.1   kernel     linkdocker0 local
+  192.168.100.0          broadcast   192.168.100.1   kernel     link virbr0 local
+  192.168.100.1              local   192.168.100.1   kernel     host virbr0 local
+192.168.100.255          broadcast   192.168.100.1   kernel     link virbr0 local
+  192.168.111.0          broadcast   192.168.111.1   kernel     link virbr1 local
+  192.168.111.1              local   192.168.111.1   kernel     host virbr1 local
+192.168.111.255          broadcast   192.168.111.1   kernel     link virbr1 local
+  192.168.178.0          broadcast  192.168.178.22   kernel     linkenp37s0 local
+ 192.168.178.22              local  192.168.178.22   kernel     hostenp37s0 local
+192.168.178.255          broadcast  192.168.178.22   kernel     linkenp37s0 local
+            ::1                                      kernel              lo 
+        fe80::/ 64                                   kernel         enp37s0 
+        fe80::/ 64                                   kernel          dummy0 
+            ::1              local                   kernel              lo local
+fe80::2ef0:5dff:fe33:fa3c              local                   kernel         enp37s0 local
+fe80::9474:e0ff:fe59:2558              local                   kernel          dummy0 local
+
+auto lo
+iface lo inet loopback
+auto enp37s0
+iface enp37s0 inet dhcp
+auto dummy0
+iface dummy0 inet static
+        address 10.8.8.8/32
+        pre-up ip link add dummy0 type dummy
+        post-down ip link del dummy0
+
 
 3. Проверьте открытые TCP порты в Ubuntu, какие протоколы и приложения используют эти порты? Приведите несколько примеров.
 sudo ss -tlpn
@@ -60,9 +103,6 @@ LISTEN        0             128                        0.0.0.0:22               
 LISTEN        0             4096                       0.0.0.0:111                     0.0.0.0:*           users:(("rpcbind",pid=547,fd=4),("systemd",pid=1,fd=35))
 LISTEN        0             128                           [::]:22                         [::]:*           users:(("sshd",pid=1155,fd=4))
 LISTEN        0             4096                          [::]:111                        [::]:*           users:(("rpcbind",pid=547,fd=6),("systemd",pid=1,fd=37))
-
-
-
 
 4. Проверьте используемые UDP сокеты в Ubuntu, какие протоколы и приложения используют эти порты?
  sudo ss -ulpn
