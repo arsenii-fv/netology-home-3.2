@@ -1,14 +1,14 @@
 ## Домашнее задание к занятию "3.6. Компьютерные сети, лекция 1"
 
 ### 1. Работа c HTTP через телнет.
---- Подключитесь утилитой телнет к сайту stackoverflow.com telnet stackoverflow.com 80
+ ```
+ Подключитесь утилитой телнет к сайту stackoverflow.com telnet stackoverflow.com 80
    отправьте HTTP запрос
 
 GET /questions HTTP/1.0
 HOST: stackoverflow.com
 [press enter]
-[press enter] ---
-
+[press enter] 
 1. 
 HTTP/1.1 301 Moved Permanently
 cache-control: no-cache, no-store, must-revalidate
@@ -29,4 +29,27 @@ X-DNS-Prefetch-Control: off
 Set-Cookie: prov=d67764cc-0612-807d-423d-19ce37c85d93; domain=.stackoverflow.com; expires=Fri, 01-Jan-2055 00:00:00 GMT; path=/; HttpOnly
 
 Connection closed by foreign host.
+```
+### 7. Какие DNS сервера отвечают за доменное имя dns.google? Какие A записи? воспользуйтесь утилитой dig
+```
+7.
+;; ANSWER SECTION:
+dns.google.com.		3	IN	A	8.8.4.4
+dns.google.com.		3	IN	A	8.8.8.8
+
+;; AUTHORITY SECTION:
+google.com.		47366	IN	NS	ns1.google.com.
+google.com.		47366	IN	NS	ns3.google.com.
+google.com.		47366	IN	NS	ns2.google.com.
+google.com.		47366	IN	NS	ns4.google.com.
+```
+
+### 8.Проверьте PTR записи для IP адресов из задания 7. Какое доменное имя привязано к IP? воспользуйтесь утилитой dig
+```
+8.
+ ;; QUESTION SECTION:
+;8.8.8.8.in-addr.arpa.		IN	PTR
+
+;; ANSWER SECTION:
+8.8.8.8.in-addr.arpa.	61829	IN	PTR	dns.google.
 ```
