@@ -86,3 +86,37 @@ done
  fi
 done
 ```
+### 4. Необходимо дописать скрипт из предыдущего задания так, чтобы он выполнялся до тех пор, пока один из узлов не окажется недоступным. Если любой из узлов недоступен - IP этого узла пишется в файл error, скрипт прерывается
+```
+```
+4.
+#!/bin/bash
+# n=0
+while ((1==1)) # Можно n==1
+do
+ curl -sm 1 http://192.168.0.1
+ if (($?==0))
+        then
+        echo "192... Host is reachable" >> curl192.log
+        else
+        echo "192... Host is unreachable" >> curl192.log
+        break # n=1
+ fi
+ curl -sm 1 http://173.194.222.113
+ if (($? ==0))
+        then
+        echo "173... Host is reachable" >> curl173.log
+        else
+        echo "173... Host is unreachable">>curl173.log
+        break # n=1
+ fi
+ curl -sm 1 http://87.250.250.242
+ if (($? ==0))
+        then
+        echo "87... Host is reachable" >> curl87.log
+        else
+        echo "87... Host is unreachable">>curl187.log
+        break # n=1
+ fi
+done
+```
