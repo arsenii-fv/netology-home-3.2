@@ -55,3 +55,34 @@ done
   2- Удалять временные файлы старше определенного времени создания
   3- Прерывать по условию (если файл слишком сильно вырос, крайний случай)
   ```
+  
+### 3.Необходимо написать скрипт, который проверяет доступность трёх IP: 192.168.0.1, 173.194.222.113, 87.250.250.242 по 80 порту и записывает результат в файл log. Проверять доступность необходимо пять раз для каждого узла.  
+  
+```
+3.
+  #!/bin/bash
+  for ii in {0..4}
+  do
+  curl -sm 1 http://192.168.0.1
+  if (($?==0))
+        then
+        echo "192... Host is reachable" >> curl192.log
+        else
+        echo "Host is unreachable" >> curl192.log
+  fi
+  curl -sm 1 http://173.194.222.113
+  if (($?==0))
+        then
+        echo "173... Host is reachable" >> curl173.log
+        else
+        echo "Host is unreachable">>curl173.log
+ fi
+ curl -sm 1 http://87.250.250.242
+ if (($?==0))
+        then
+        echo "87... Host is reacheble" >> curl87.log
+        else
+        echo "Host is unreachable">>curl187.log
+ fi
+done
+```
