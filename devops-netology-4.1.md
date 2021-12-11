@@ -98,7 +98,7 @@ do
         then
         echo "192... Host is reachable" >> curl192.log
         else
-        echo "192... Host is unreachable" >> curl192.log
+        echo "192... Host is unreachable" >> error_curl192.log
         break # n=1
  fi
  curl -sm 1 http://173.194.222.113
@@ -106,7 +106,7 @@ do
         then
         echo "173... Host is reachable" >> curl173.log
         else
-        echo "173... Host is unreachable">>curl173.log
+        echo "173... Host is unreachable">>error_curl173.log
         break # n=1
  fi
  curl -sm 1 http://87.250.250.242
@@ -114,7 +114,7 @@ do
         then
         echo "87... Host is reachable" >> curl87.log
         else
-        echo "87... Host is unreachable">>curl187.log
+        echo "87... Host is unreachable">> error_curl187.log
         break # n=1
  fi
 done
