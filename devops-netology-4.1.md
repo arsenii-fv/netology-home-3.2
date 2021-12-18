@@ -90,32 +90,22 @@ done
 ``` bash
 4.
 #!/bin/bash
-# n=0
-while ((1==1)) # Можно n==1
+ip_array=(192.168.0.1 173.194.222.113 87.250.250.242)
+
+cat /dev/null > curl_host.log
+cat /dev/null > error_curl_host.log
+for ip in ${ip_array[@]}
 do
- curl -sm 1 http://192.168.0.1
- if (($?==0))
-        then
-        echo "192... Host is reachable" >> curl192.log
-        else
-        echo "192... Host is unreachable" >> error_curl192.log
-        break # n=1
- fi
- curl -sm 1 http://173.194.222.113
- if (($? ==0))
-        then
-        echo "173... Host is reachable" >> curl173.log
-        else
-        echo "173... Host is unreachable">>error_curl173.log
-        break # n=1
- fi
- curl -sm 1 http://87.250.250.242
- if (($? ==0))
-        then
-        echo "87... Host is reachable" >> curl87.log
-        else
-        echo "87... Host is unreachable">> error_curl187.log
-        break # n=1
- fi
+        curl -sm 1 http://$ip
+        if (($? == 0))
+                then
+                echo $ip >> curl_host.log
+                echo "host is reacheble" >> curl_host.log
+
+                else
+                echo $ip >> error_curl_host.log
+                echo "host is unreacheble" >> error_curl_host.log
+        fi
 done
+
 ```
